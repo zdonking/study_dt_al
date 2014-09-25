@@ -26,3 +26,6 @@
 *.exe
 *.out
 *.app
+# for vim temp file
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]

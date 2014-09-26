@@ -150,7 +150,7 @@ void ordering_test(string fileName)
    ifstream in;
    ofstream out;
    char c;
-   in.open(fileName);
+   in.open(fileName.c_str());
    if(in.fail()){
      cout<<"Filed to open File .There are some ex files, getty.txt sonnet.txt rj.txt \n";
      exit(1);

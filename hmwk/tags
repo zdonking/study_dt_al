@@ -1,0 +1,110 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BSTNode	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode(T theKey) { key = theKey; left = NULL; right = NULL; number = 1; }$/;"	f	class:BSTNode
+BSTNode	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode(T theKey, BSTNode<T> *theLeft, BSTNode<T> *theRight) { key = theKey; left = theLeft; right = theRight; number = 1; }$/;"	f	class:BSTNode
+BSTNode	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^class BSTNode$/;"	c
+BST_HH	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	10;"	d
+BSTree_Fast	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTree_Fast() { maxDepth = 0; root = NULL; }  \/\/ make an empty BST$/;"	f	class:BSTree_Fast
+BSTree_Fast	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^class BSTree_Fast$/;"	c
+BSTree_Slow	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTree_Slow() { tree.clear(); }               \/\/ make an empty BST$/;"	f	class:BSTree_Slow
+BSTree_Slow	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^class BSTree_Slow$/;"	c
+CPP	lab_4/dll_list/Makefile	/^  CPP	= g++$/;"	m
+CPP	project_1/bst_fast_and_slow/Makefile	/^  CPP	= g++$/;"	m
+CPPFLAGS	lab_4/dll_list/Makefile	/^  CPPFLAGS = -g -w$/;"	m
+CPPFLAGS	project_1/bst_fast_and_slow/Makefile	/^  CPPFLAGS = -g -w$/;"	m
+DLL_LIST_HH	lab_4/dll_list/dll_list.hh	5;"	d
+EXECNAME	lab_4/dll_list/Makefile	/^EXECNAME=list$/;"	m
+EXECNAME	project_1/bst_fast_and_slow/Makefile	/^EXECNAME=bst$/;"	m
+MY_INCS	lab_4/dll_list/Makefile	/^MY_INCS = -I.$/;"	m
+MY_INCS	project_1/bst_fast_and_slow/Makefile	/^MY_INCS = -I.$/;"	m
+MY_LIBDIRS	lab_4/dll_list/Makefile	/^MY_LIBDIRS = $/;"	m
+MY_LIBDIRS	project_1/bst_fast_and_slow/Makefile	/^MY_LIBDIRS = $/;"	m
+MY_LIBS	lab_4/dll_list/Makefile	/^MY_LIBS = $/;"	m
+MY_LIBS	project_1/bst_fast_and_slow/Makefile	/^MY_LIBS = $/;"	m
+MyList	lab_4/dll_list/dll_list.hh	/^MyList<T>::MyList()$/;"	f	class:MyList
+MyList	lab_4/dll_list/dll_list.hh	/^class MyList$/;"	c
+Node	9_18/linked_list.cpp	/^struct Node{$/;"	s	file:
+Node	lab_4/dll_list/dll_list.hh	/^  Node() { }$/;"	f	class:Node
+Node	lab_4/dll_list/dll_list.hh	/^  Node(T theData, Node<T> *thePrev, Node<T> *theNext) { data = theData; prev = thePrev; next = theNext; }$/;"	f	class:Node
+Node	lab_4/dll_list/dll_list.hh	/^class Node$/;"	c
+OBJECTS	lab_4/dll_list/Makefile	/^OBJECTS = main.o $/;"	m
+OBJECTS	project_1/bst_fast_and_slow/Makefile	/^OBJECTS = main.o $/;"	m
+SRCS	lab_4/dll_list/Makefile	/^SRCS = main.cpp $/;"	m
+SRCS	project_1/bst_fast_and_slow/Makefile	/^SRCS = main.cpp $/;"	m
+addNode	9_18/linked_list.cpp	/^void addNode(struct Node *head,int n){$/;"	f
+addvalue	plus_practice/ref_value.cpp	/^int addvalue(int a,int b )$/;"	f
+addvalue_by_ref	plus_practice/ref_value.cpp	/^int addvalue_by_ref(int& a,int& b )$/;"	f
+back	lab_4/dll_list/dll_list.hh	/^const T & MyList<T>::back()$/;"	f	class:MyList
+char_test	lab_4/dll_list/main.cpp	/^void char_test()$/;"	f
+contains	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^bool BSTree_Fast<T>::contains(BSTNode<T> *node,T & key){$/;"	f	class:BSTree_Fast
+contains	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^bool BSTree_Fast<T>::contains(T & key)$/;"	f	class:BSTree_Fast
+contains	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^bool BSTree_Slow<T>::contains(T & key)$/;"	f	class:BSTree_Slow
+curnum	lab_4/dll_list/dll_list.hh	/^  int curnum;$/;"	m	class:MyList
+data	9_18/linked_list.cpp	/^    int data;$/;"	m	struct:Node	file:
+data	lab_4/dll_list/dll_list.hh	/^  T data;$/;"	m	class:Node
+deleteNode	9_18/linked_list.cpp	/^bool deleteNode(struct Node **head,Node *ptrDel){$/;"	f
+display	9_18/linked_list.cpp	/^void display(struct Node *head){$/;"	f
+empty	lab_4/dll_list/dll_list.hh	/^bool MyList<T>::empty()$/;"	f	class:MyList
+findMax	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^const T & BSTree_Fast<T>::findMax()$/;"	f	class:BSTree_Fast
+findMax	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^const T & BSTree_Slow<T>::findMax()$/;"	f	class:BSTree_Slow
+first	lab_4/dll_list/dll_list.hh	/^  Node<T> *first;                        \/\/ one end of the list; access rest through next$/;"	m	class:MyList
+front	lab_4/dll_list/dll_list.hh	/^const T & MyList<T>::front()$/;"	f	class:MyList
+getData	lab_4/dll_list/dll_list.hh	/^  const T & getData() { return data; }$/;"	f	class:Node
+getKey	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  const T & getKey() { return key; }$/;"	f	class:BSTNode
+getLeft	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode<T> *getLeft() { return left; }$/;"	f	class:BSTNode
+getMaxDepth	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  int getMaxDepth() { return maxDepth; }$/;"	f	class:BSTree_Fast
+getNext	lab_4/dll_list/dll_list.hh	/^  Node<T> *getNext() { return next; }$/;"	f	class:Node
+getPrev	lab_4/dll_list/dll_list.hh	/^  Node<T> *getPrev() { return prev; }$/;"	f	class:Node
+getRight	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode<T> *getRight() { return right; }$/;"	f	class:BSTNode
+initNode	9_18/linked_list.cpp	/^void initNode (struct Node *head ,int n){$/;"	f
+insert	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^void BSTree_Fast<T>::insert(T & key)$/;"	f	class:BSTree_Fast
+insert	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^void BSTree_Slow<T>::insert(T & key)$/;"	f	class:BSTree_Slow
+insertFront	9_18/linked_list.cpp	/^void insertFront(struct Node **head,int n){$/;"	f
+insertNode	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^int BSTree_Fast<T>::insertNode(BSTNode<T> *node,T & key,int curtime ){$/;"	f	class:BSTree_Fast
+insert_ordered	lab_4/dll_list/dll_list.hh	/^void MyList<T>::insert_ordered(T & theData)$/;"	f	class:MyList
+key	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  T key;$/;"	m	class:BSTNode
+last	lab_4/dll_list/dll_list.hh	/^  Node<T> *last;                         \/\/ other end of the list; access rest through prev$/;"	m	class:MyList
+left	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode<T> *left;   \/\/ link to left child$/;"	m	class:BSTNode
+main	9_18/linked_list.cpp	/^int main()$/;"	f
+main	lab_4/dll_list/main.cpp	/^int main(int argc, char** argv)$/;"	f
+main	plus_practice/arstr.cpp	/^int main()$/;"	f
+main	plus_practice/point.cpp	/^int main()$/;"	f
+main	plus_practice/ref_value.cpp	/^int main()$/;"	f
+main	plus_practice/vector.cpp	/^int main(){$/;"	f
+main	project_1/bst_fast_and_slow/main.cpp	/^int main(int argc, char** argv)$/;"	f
+maxDepth	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  int maxDepth;$/;"	m	class:BSTree_Fast
+next	9_18/linked_list.cpp	/^    Node* next;$/;"	m	struct:Node	file:
+next	lab_4/dll_list/dll_list.hh	/^  Node<T> *next;  \/\/ link forward$/;"	m	class:Node
+number	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  int number;         \/\/ how many occurrences of key there are$/;"	m	class:BSTNode
+ordering_test	lab_4/dll_list/main.cpp	/^void ordering_test(string fileName)$/;"	f
+pop_back	lab_4/dll_list/dll_list.hh	/^void MyList<T>::pop_back()$/;"	f	class:MyList
+pop_front	lab_4/dll_list/dll_list.hh	/^void MyList<T>::pop_front()$/;"	f	class:MyList
+prev	lab_4/dll_list/dll_list.hh	/^  Node<T> *prev;  \/\/ link back$/;"	m	class:Node
+print	lab_4/dll_list/dll_list.hh	/^  void print() { cout << data << endl; }$/;"	f	class:Node
+print	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  void print() { cout << key << " (" << number << ")" << endl; }$/;"	f	class:BSTNode
+print_by_order	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^void BSTree_Fast<T>::print_by_order(){$/;"	f	class:BSTree_Fast
+print_node	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^void BSTree_Fast<T>::print_node(BSTNode<T> *node ){$/;"	f	class:BSTree_Fast
+push_back	lab_4/dll_list/dll_list.hh	/^void MyList<T>::push_back(T & theData)$/;"	f	class:MyList
+push_front	lab_4/dll_list/dll_list.hh	/^void MyList<T>::push_front(T & theData)$/;"	f	class:MyList
+readme	lab_4/dll_list/main.cpp	/^void readme(){$/;"	f
+reverse_char_test	lab_4/dll_list/main.cpp	/^void reverse_char_test()$/;"	f
+reverse_string_test	lab_4/dll_list/main.cpp	/^void reverse_string_test()$/;"	f
+right	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode<T> *right;  \/\/ link to right child$/;"	m	class:BSTNode
+root	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  BSTNode<T> *root;                             \/\/ pointer to the node at the root of the tree$/;"	m	class:BSTree_Fast
+setData	lab_4/dll_list/dll_list.hh	/^  void setData(T theData) { data = theData; }$/;"	f	class:Node
+setKey	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  void setKey(T theKey) { key = theKey; }$/;"	f	class:BSTNode
+setLeft	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  void setLeft(BSTNode<T> * theLeft) { left = theLeft; }$/;"	f	class:BSTNode
+setNext	lab_4/dll_list/dll_list.hh	/^  void setNext(Node<T> * theNext) { next = theNext; }$/;"	f	class:Node
+setPrev	lab_4/dll_list/dll_list.hh	/^  void setPrev(Node<T> * thePrev) { prev = thePrev; }$/;"	f	class:Node
+setRight	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  void setRight(BSTNode<T> * theRight) { right = theRight; }$/;"	f	class:BSTNode
+size	lab_4/dll_list/dll_list.hh	/^int MyList<T>::size()$/;"	f	class:MyList
+string_test	lab_4/dll_list/main.cpp	/^void string_test()$/;"	f
+test_contains	project_1/bst_fast_and_slow/main.cpp	/^void test_contains(){$/;"	f
+test_fast_insert	project_1/bst_fast_and_slow/main.cpp	/^void test_fast_insert(){$/;"	f
+test_findMax	project_1/bst_fast_and_slow/main.cpp	/^void test_findMax(){$/;"	f
+test_print_by_order	project_1/bst_fast_and_slow/main.cpp	/^void test_print_by_order(){$/;"	f
+tree	project_1/bst_fast_and_slow/bst_fast_and_slow.hh	/^  vector < BSTNode<T> * > tree;                 \/\/ vector of pointers to nodes in the "tree"$/;"	m	class:BSTree_Slow

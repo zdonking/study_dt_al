@@ -147,7 +147,6 @@ void MyList<T>::insert_ordered(T & theData)
     last=temp;
   }else{
     Node<T> *nxt=first;
-    int i=1;
     while(nxt!=NULL){
       temp->setNext(nxt);
       if(theData<nxt->getData()){
@@ -160,8 +159,7 @@ void MyList<T>::insert_ordered(T & theData)
         nxt->setPrev(temp);
         break;
       }
-      i++;
-      if((nxt->getNext())!=NULL){
+      if((nxt->getNext())){
           nxt= nxt->getNext();
       }else{
           nxt->setNext(temp);
@@ -173,8 +171,6 @@ void MyList<T>::insert_ordered(T & theData)
     }
   }
   curnum++;
-  Node<T> *tt=first;
-  int j=1;
 }
 
 //----------------------------------------------------------------------------

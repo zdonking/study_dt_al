@@ -80,10 +80,12 @@ private:
   BSTNode<T> *root;                             // pointer to the node at the root of the tree
   int insertNode(BSTNode<T> *node,T &,int curtime);
   void print_node(BSTNode<T> *node );
+  bool contains(BSTNode<T> *node,T & );
+  int getTotalNumber(BSTNode<T> *node);
 
 };
 
-//TODO
+//DONE
 //print all keys from smallest to largest
 template<typename T>
 void BSTree_Fast<T>::print_by_order(){
@@ -92,6 +94,9 @@ void BSTree_Fast<T>::print_by_order(){
     return ;
   }
   print_node(root);
+  int total_number=getTotalNumber(root);
+  cout<<"tree maximum:"<<maxDepth<<endl;
+
 }
 
 template<typename T>
@@ -150,22 +155,50 @@ int BSTree_Fast<T>::insertNode(BSTNode<T> *node,T & key,int curtime ){
 
 
 //----------------------------------------------------------------------------
-
+//DONE
 template<typename T>
 bool BSTree_Fast<T>::contains(T & key)
 {
-  // ???
+  if(!root){
+    return false;
+  }
+  bool isContain=contains(root,key);
+  return isContain;
+}
+template<typename T>
+bool BSTree_Fast<T>::contains(BSTNode<T> *node,T & key){
+  if(!node){
+    return false;
+  }
+  if(node->getKey()==key){
+    return true;
+  }else if(node->getKey()>key){
+    return contains(node->getLeft(),key);
+  }else if(node->getKey()<key){
+    return contains(node->getRight(),key);
+  }
 }
 
 //----------------------------------------------------------------------------
 
 // return largest key in BST
 // print error and exit if BST is empty
-
+//DONE find the right leaf
 template<typename T>
 const T & BSTree_Fast<T>::findMax()
 {
-  // ???
+  if(!root){
+    cout<<"error,the tree is empty ";
+    exit(1);
+  }
+  BSTNode<T> *node=root;
+  while(node){
+    if(node->getRight()){
+      node=node->getRight();
+    }else{
+      return node->getKey();
+    }
+  }
 }
 
 //----------------------------------------------------------------------------

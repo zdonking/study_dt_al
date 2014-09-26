@@ -166,7 +166,7 @@ void ordering_test(string fileName)
       else if(isalpha(c))
         c=tolower(c);
       }
-    if(c=='\n'||c=='\r'||c=='\n\r'){
+    if(c=='\n'||c=='\r'){
       c=' ';
     }
      if(c!=' '){

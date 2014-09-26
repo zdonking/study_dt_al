@@ -45,10 +45,13 @@ int main(int argc, char **argv)
     // turn capital letters into lower-case
 
     if (!isspace(c)) {
-      if (ispunct(c) && c != '\'')
+      if (ispunct(c) )
 	c = ' ';
       else if (isalpha(c))
 	c = tolower(c);
+    }
+    if(c=='\n'){
+      c=' ';
     }
 
     // write to file and echo to console

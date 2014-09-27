@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+//#include <itererator>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ public:
   void setRight(BSTNode<T> * theRight) { right = theRight; }
 
   void print() { cout << key << " (" << number << ")" << endl; }
-  void addnumber(){number++};
+  void addnumber(){ number++; }
 
 private:
 
@@ -58,7 +59,7 @@ private:
 
 // a binary search tree, implemented as a linked structure
 
-// this is only partial--there's no remove functionality, for example
+// this is only partial--there's no remove functionalitery, for example
 
 template<typename T>
 class BSTree_Fast
@@ -148,12 +149,13 @@ int BSTree_Fast<T>::insertNode(BSTNode<T> *node,T & key,int curtime ){
   if(key<node->getKey()){
     if(!node->getLeft()){
       node->setLeft(new BSTNode<T>(key));
-    }else{
+    }else {
       node=node->getLeft();
       curtime=insertNode(node,key,curtime);
     }
   }else if(key==node->getKey()){
-    cout<<"insert failed.because key exist:"<<key<<endl;;
+    node->addnumber();
+    cout<<"insert failed. only add number :"<<key<<endl;;
     return curtime;
   }else{
     if(!node->getRight()){
@@ -195,7 +197,7 @@ bool BSTree_Fast<T>::contains(BSTNode<T> *node,T & key){
 //----------------------------------------------------------------------------
 
 // return largest key in BST
-// print error and exit if BST is empty
+// print error and exiter if BST is empty
 //DONE find the right leaf
 template<typename T>
 const T & BSTree_Fast<T>::findMax()
@@ -264,43 +266,52 @@ void BSTree_Slow<T>::insert(T & key)
 template<typename T>
 bool BSTree_Slow<T>::contains(T & key)
 {
-  for (iterator it=vector.begin();it!=vector.end();++it){
-    if(key==it->getKey()){
-      return true;
-    }  
-  }
+  //for (itererator iter=vector.begin();iter!=vector.end();++iter){
+  //  if(key==iter->getKey()){
+  //    return true;
+  //  }  
+  //}
   return false;
 }
 
 //----------------------------------------------------------------------------
 
 // return largest key in BST
-// print error and exit if BST is empty
+// print error and exiter if BST is empty
 
 template<typename T>
 const T & BSTree_Slow<T>::findMax()
 {
-  T t;
-  for (iterator it=vector.begin();it!=vector.end();++it){
-    if(!t){
-      t=*it;
-    }
-    if(t<it->getKey()){
-      t=*it;
-    }
+  //T t;
+  //vector < BSTNode<T> * >::itererator iter;
+  std::vector<BSTNode<T>*>::iterator iter;
+                   
+  for (iter=tree.begin();iter!=tree.end();iter++){
+      cout<<iter<<endl;
+   // if(!t){
+   //   cout<<*iter<<endl;
+   //   //t=*iter;
+   // }
+   // if(t<iter->getKey()){
+   //   cout<<*iter<<endl;
+   //   //t=*iter;
+   // }
   }
-  return t;
+  //return t;
+  return NULL;
 }
 template<typename T>
 void BSTree_Slow<T>::print()
 {
   
+  
 }
-template<typename T>
-vector BSTree_Slow<T>::sort()
-{
-
-}
+//template<typename T>
+//vector BSTree_Slow<T>::sort()
+//{
+//  return vector;
+//
+//}
 
 
 //----------------------------------------------------------------------------

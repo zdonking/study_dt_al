@@ -200,19 +200,107 @@ void test_bst_by_files(){
   drive_slow_by_file("cleaned_bts.txt");
   drive_slow_by_file("cleaned_doi.txt");
   drive_slow_by_file("cleaned_greatexp.txt");
-  
-  //cout<<"begin create Fast_BSTree ..."<<endl;
-  //BSTree_Fast<string> fbst1=create_fbst_by_file("cleaned_bts.txt");
-  //BSTree_Fast<string> fbst2=create_fbst_by_file("cleaned_doi.txt");
-  //BSTree_Fast<string> fbst3=create_fbst_by_file("cleaned_greatexp.txt");
-  //cout<<"create Fast_BSTree finished."<<endl;
-  //cout<<"for cleaned_bts.txt: "<<endl;
-  //output_fast(&fbst1);
-  //cout<<"for cleaned_doi.txt: "<<endl;
-  //output_fast(&fbst2);
-  //cout<<"for cleaned_greatexp.txt: "<<endl;
-  //output_fast(&fbst3);
 }
+
+void drive_fast_outtime(string fileName){
+  cout<<"BSTree_Fast create / verfiy words / findMax from file:"<<fileName<<endl;
+  timeval t1, t2;
+  double elapsedTime;
+  gettimeofday(&t1, NULL);
+  BSTree_Fast<string> fbst=create_fbst_by_file(fileName);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tcreate fast tree  need "<< elapsedTime << " ms.\n";
+  
+  string key="love";
+  gettimeofday(&t1, NULL);
+  bool isContain=fbst.contains(key);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tverify \""<<key<<"\" "<<isContain<<" , need "<<elapsedTime << " ms.\n";
+
+  key="death";
+  gettimeofday(&t1, NULL);
+  isContain=fbst.contains(key);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tverify \""<<key<<"\" "<<isContain<<" , need "<<elapsedTime << " ms.\n";
+
+  key="tyranny";
+  gettimeofday(&t1, NULL);
+  isContain=fbst.contains(key);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tverify \""<<key<<"\" "<<isContain<<" , need "<<elapsedTime << " ms.\n";
+
+  gettimeofday(&t1, NULL);
+  string max=fbst.findMax();
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tget last word : "<<max<<" , need "<<elapsedTime << " ms.\n";
+  
+  cout<<"The file:"<<fileName<<" operate via BSTree_Fast end\n"<<endl;
+}
+
+void drive_slow_outtime(string fileName){
+  cout<<"BSTree_Slow create / verfiy words / findMax from file:"<<fileName<<endl;
+  timeval t1, t2;
+  double elapsedTime;
+  gettimeofday(&t1, NULL);
+  BSTree_Slow<string> fbst=create_slow_by_file(fileName);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tcreate fast tree  need "<< elapsedTime << " ms.\n";
+  
+  string key="love";
+  gettimeofday(&t1, NULL);
+  bool isContain=fbst.contains(key);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tverify \""<<key<<"\" "<<isContain<<" , need "<<elapsedTime << " ms.\n";
+
+  key="death";
+  gettimeofday(&t1, NULL);
+  isContain=fbst.contains(key);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tverify \""<<key<<"\" "<<isContain<<" , need "<<elapsedTime << " ms.\n";
+
+  key="tyranny";
+  gettimeofday(&t1, NULL);
+  isContain=fbst.contains(key);
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tverify \""<<key<<"\" "<<isContain<<" , need "<<elapsedTime << " ms.\n";
+
+  gettimeofday(&t1, NULL);
+  string max=fbst.findMax();
+  gettimeofday(&t2, NULL);
+  elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0; 
+  elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+  cout <<"\tget last word : "<<max<<" , need "<<elapsedTime << " ms.\n";
+  
+  cout<<"The file:"<<fileName<<" operate via BSTree_Fast end\n"<<endl;
+}
+
+void test_bst_time(){
+  drive_fast_outtime("cleaned_bts.txt");
+  drive_fast_outtime("cleaned_doi.txt");
+  drive_fast_outtime("cleaned_greatexp.txt");
+  drive_slow_outtime("cleaned_bts.txt");
+  drive_slow_outtime("cleaned_doi.txt");
+  drive_slow_outtime("cleaned_greatexp.txt");
+} 
+
 
 int main(int argc, char** argv)
 {
@@ -228,7 +316,9 @@ int main(int argc, char** argv)
   test_slow_print();
 
   //compare fast bst to slow bst 
-  test_bst_by_files();
+  //test_bst_by_files();
+  string filename="cleaned_bts.txt";
+  test_bst_time();
   return 0;
 }
 

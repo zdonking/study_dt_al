@@ -292,7 +292,8 @@ void drive_slow_outtime(string fileName){
   cout<<"The file:"<<fileName<<" operate via BSTree_Fast end\n"<<endl;
 }
 
-void test_bst_time(){
+void test_bst_time()
+{
   drive_fast_outtime("cleaned_bts.txt");
   drive_fast_outtime("cleaned_doi.txt");
   drive_fast_outtime("cleaned_greatexp.txt");

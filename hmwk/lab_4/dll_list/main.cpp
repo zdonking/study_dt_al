@@ -190,8 +190,6 @@ void ordering_test(string fileName)
       i++;
    }
    cout<<"\n";
-
-
 }
 void readme(){
     cout << "please enter the 2nd argument as the different test model "<<endl;

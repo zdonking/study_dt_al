@@ -40,6 +40,7 @@ public:
 
   void print() { cout << key << " (" << number << ")" << endl; }
   void addnumber(){ number++; }
+  int getNumber(){ return number; }
 
 private:
 
@@ -73,7 +74,9 @@ public:
   const T & findMax();                          // what is the smallest key in the BST?
 
   int getMaxDepth() { return maxDepth; }
-  void print_by_order();
+  void print();
+  int getTotalNumber();
+  int getUniqueNumber();
 
 private:
 
@@ -84,33 +87,61 @@ private:
   void print_node(BSTNode<T> *node );
   bool contains(BSTNode<T> *node,T & );
   int getTotalNumber(BSTNode<T> *node);
+  int getUniqueNumber(BSTNode<T> *node);
 
 };
 
 //DONE
 //print all keys from smallest to largest
 template<typename T>
-void BSTree_Fast<T>::print_by_order(){
+void BSTree_Fast<T>::print(){
   if(!root){
     cout<<"This is empty BSTree"<<endl;
     return ;
   }
+  //print node from small to largest
+  cout<<"all member from small to large:"<<endl;
   print_node(root);
+  //print unique words number
+  int unique_number=getUniqueNumber(root);
+  cout<<"tree unique number:"<<unique_number<<endl;
+  //print total words number
   int total_number=getTotalNumber(root);
   cout<<"tree total number:"<<total_number<<endl;
+  //print maximum -depth
   cout<<"tree maximum:"<<maxDepth<<endl;
 
 }
 template<typename T>
+int BSTree_Fast<T>::getUniqueNumber(){
+  return getUniqueNumber(root);
+}
+template<typename T>
+int BSTree_Fast<T>::getTotalNumber(){
+  return getTotalNumber(root);
+}
+
+template<typename T>
+int BSTree_Fast<T>::getUniqueNumber(BSTNode<T> *node){
+  int total=0;
+  if(node){
+    total++;
+    total+=getUniqueNumber(node->getLeft());
+    total+=getUniqueNumber(node->getRight());
+  }
+  return total;
+}
+
+template<typename T>
 int BSTree_Fast<T>::getTotalNumber(BSTNode<T> *node){
   int total=0;
-  if(!node){
-    total++;
-    return total; 
+  if(node){
+    total+=node->getNumber();
+    total+=getTotalNumber(node->getLeft());
+    total+=getTotalNumber(node->getRight());
   }
-  total+=getTotalNumber(node->getLeft());
-  total+=getTotalNumber(node->getRight());
   return total;
+  
 }
 
 template<typename T>
@@ -155,7 +186,7 @@ int BSTree_Fast<T>::insertNode(BSTNode<T> *node,T & key,int curtime ){
     }
   }else if(key==node->getKey()){
     node->addnumber();
-    cout<<"insert failed. only add number :"<<key<<endl;;
+//    cout<<"insert failed. only add number :"<<key<<endl;;
     return curtime;
   }else{
     if(!node->getRight()){
@@ -241,7 +272,6 @@ public:
 private:
 
   vector < BSTNode<T> * > tree;                 // vector of pointers to nodes in the "tree"
-
 };
 
 //----------------------------------------------------------------------------
@@ -258,6 +288,15 @@ void BSTree_Slow<T>::insert(T & key)
   if(!contains(key)){
     tree.push_back(node);
     return;
+  }else{
+    typename vector<BSTNode< T > *>::iterator iter;
+    for (iter=tree.begin();iter!=tree.end();++iter){
+      if(key==(*iter)->getKey()){
+        (*iter)->addnumber();
+        return;
+      }  
+    }
+
   }
 }
 
@@ -266,11 +305,12 @@ void BSTree_Slow<T>::insert(T & key)
 template<typename T>
 bool BSTree_Slow<T>::contains(T & key)
 {
-  //for (itererator iter=vector.begin();iter!=vector.end();++iter){
-  //  if(key==iter->getKey()){
-  //    return true;
-  //  }  
-  //}
+  typename vector<BSTNode< T > *>::iterator iter;
+  for (iter=tree.begin();iter!=tree.end();++iter){
+    if(key==(*iter)->getKey()){
+      return true;
+    }  
+  }
   return false;
 }
 
@@ -282,36 +322,39 @@ bool BSTree_Slow<T>::contains(T & key)
 template<typename T>
 const T & BSTree_Slow<T>::findMax()
 {
-  //T t;
-  //vector < BSTNode<T> * >::itererator iter;
-  std::vector<BSTNode<T>*>::iterator iter;
-                   
-  for (iter=tree.begin();iter!=tree.end();iter++){
-      cout<<iter<<endl;
-   // if(!t){
-   //   cout<<*iter<<endl;
-   //   //t=*iter;
-   // }
-   // if(t<iter->getKey()){
-   //   cout<<*iter<<endl;
-   //   //t=*iter;
-   // }
+  T max;
+  if(!tree.empty()){
+    max=tree[0]->getKey();
+  }else{
+    return NULL;
+  } 
+  typename vector<BSTNode< T > *>::iterator itt;
+  for (itt=tree.begin();itt!=tree.end();itt++){
+     if(max<(*itt)->getKey()){
+       max=(*itt)->getKey();
+     }
   }
-  //return t;
-  return NULL;
+  return max;
 }
 template<typename T>
 void BSTree_Slow<T>::print()
 {
-  
-  
+  //order print
+  cout<<" print in the order they are stored in the vector"<<endl;
+  typename vector<BSTNode< T > *>::iterator itt;
+  for (itt=tree.begin();itt!=tree.end();itt++){
+    (*itt)->print();
+  }
+  //print unique size
+  cout<<"unigue size:"<<tree.size()<<endl;
+  //print total size
+  typename vector<BSTNode< T > *>::iterator it;
+  int total=0;
+  for (it=tree.begin();it!=tree.end();it++){
+    total+=(*it)->getNumber();
+  }
+  cout<<"total size:"<<total<<endl;
 }
-//template<typename T>
-//vector BSTree_Slow<T>::sort()
-//{
-//  return vector;
-//
-//}
 
 
 //----------------------------------------------------------------------------

@@ -14,6 +14,8 @@ void driver(char *filename)
 
   my_avl.insertFileWords(filename);
   my_avl.print_level_and_pretty();
+  cout<<"in order print"<<endl;
+  my_avl.print_inorder();
 
   // Statistics
 

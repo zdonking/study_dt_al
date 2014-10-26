@@ -155,14 +155,15 @@ void AVLTree<T>::updateBalanceFactors()
   }else{
     parent->balanceFactor++;
   }
-    cout<<"vvv  "<<parent<<"||"<<parent->getKey()<<endl;
+    //cout<<"vvv  "<<parent<<"||"<<parent->getKey()<<endl;
+    
 
   AVLNode<T> *Q;
   while(parent->getParent()!=NULL && (parent->balanceFactor!=2||parent->balanceFactor!=-2) ){
     Q=parent;
-    cout<<"ppp"<<parent<<"||"<<parent->getKey()<<endl;
+    //cout<<"ppp"<<parent<<"||"<<parent->getKey()<<endl;
     parent=parent->getParent();
-    cout<<"ssss"<<parent<<"||"<<parent->getKey()<<endl;
+    //cout<<"ssss"<<parent<<"||"<<parent->getKey()<<endl;
    // if(parent==NULL){
    //   return;
    // }
@@ -170,8 +171,8 @@ void AVLTree<T>::updateBalanceFactors()
       return;
     } 
     if(Q==parent->getLeft()){
-      cout<<parent->getKey()<<"||"<<parent->balanceFactor<<endl;
-      cout<<Q->getKey()<<"||"<<Q->balanceFactor<<endl;
+   //   cout<<parent->getKey()<<"||"<<parent->balanceFactor<<endl;
+     // cout<<Q->getKey()<<"||"<<Q->balanceFactor<<endl;
       parent->balanceFactor--;
     }else{
       cout<<parent->getKey()<<endl;
@@ -179,6 +180,7 @@ void AVLTree<T>::updateBalanceFactors()
       parent->balanceFactor++;
     }
   }
+  /*
   cout<<"begi rebalance"<<endl;
   if(parent->balanceFactor==-2 ){
     cout<<"||"<<parent->getKey()<<"||"<<parent->balanceFactor<<endl;
@@ -205,6 +207,7 @@ void AVLTree<T>::updateBalanceFactors()
     }
     updateBalanceFactors();
   }
+  */
 }
 
 
@@ -557,10 +560,10 @@ void AVLTree<T>::insert(T & key)
   // normal BST insert
 
   root = insert(key, root, NULL);
-
+//  print_inorder();
   // this is where the AVL magic happens
 
-  updateBalanceFactors();
+//  updateBalanceFactors();
   //cout<<"end"<<endl;
 }
 

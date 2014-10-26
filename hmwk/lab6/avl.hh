@@ -1,4 +1,7 @@
 //----------------------------------------------------------------------------
+// by Christopher Rasmussen, cer@cis.udel.edu
+// created & modified: October, 2014
+// v. 1.01
 //----------------------------------------------------------------------------
 
 #ifndef AVL_HH
@@ -25,13 +28,13 @@ class AVLNode
 public: 
 
   AVLNode(T theKey) 
-  { key = theKey; parent = NULL; left = NULL; right = NULL; number = 1; balanceFactor = 0; }
+  { key = theKey; parent = NULL; left = NULL; right = NULL; number = 1; balanceFactor = currentHeight = 0; }
 
   AVLNode(T theKey, AVLNode<T> *theLeft, AVLNode<T> *theRight) 
-  { key = theKey; parent = NULL; left = theLeft; right = theRight; number = 1; balanceFactor = 0; }
+  { key = theKey; parent = NULL; left = theLeft; right = theRight; number = 1; balanceFactor = currentHeight = 0; }
 
   AVLNode(T theKey, AVLNode<T> *theParent, AVLNode<T> *theLeft, AVLNode<T> *theRight) 
-  { key = theKey; parent = theParent; left = theLeft; right = theRight; number = 1; balanceFactor = 0; }
+  { key = theKey; parent = theParent; left = theLeft; right = theRight; number = 1; balanceFactor = currentHeight = 0; }
 
   const T & getKey() { return key; }
   void setKey(T & theKey) { key = theKey; }
@@ -50,10 +53,11 @@ public:
 
   void print() { cout << key << " (" << number << ")" << endl; }
 
-  int print_column;   // used by pretty print
+  int print_column;    // used by pretty print
   
   int balanceFactor;
-
+  int currentHeight;   // used to speed up computation of ancestor node heights
+ 
 private:
 
   T key;
@@ -82,7 +86,7 @@ class AVLTree
 {
 public:
   
-  AVLTree() { root = NULL; node_just_inserted = NULL; numNodes = 0; numKeys = 0; }   // make an empty AVL tree
+  AVLTree() { root = NULL; node_just_inserted = NULL; numNodes = 0; numKeys = 0; worstBalanceFactor = 0; }   // make an empty AVL tree
 
   void insert(T &);                             // put a key into the AVL tree 
   AVLNode<T> *insert(T &, AVLNode<T> *, AVLNode<T> *); 
@@ -105,7 +109,13 @@ public:
   void print_pretty();
   void print_level_and_pretty();
 
-  int computeHeight();                          // needed for balance factor computation
+  void setAllBalanceFactors();
+  void setAllBalanceFactors(AVLNode<T> *);
+
+  void setAllCurrentHeights();
+  int setAllCurrentHeights(AVLNode<T> *);
+
+  int computeHeight();                          // needed for balance factor computation 
   int computeHeight(AVLNode<T> *);
 
   int computeBalance(AVLNode<T> *);
@@ -121,6 +131,8 @@ public:
   AVLNode<T> *root;                             // pointer to the node at the root of the tree
 
   AVLNode<T> *node_just_inserted;               // pointer to the node last inserted
+
+  int worstBalanceFactor;
 
 private:
 
@@ -180,7 +192,6 @@ void AVLTree<T>::updateBalanceFactors()
       parent->balanceFactor++;
     }
   }
-  /*
   cout<<"begi rebalance"<<endl;
   if(parent->balanceFactor==-2 ){
     cout<<"||"<<parent->getKey()<<"||"<<parent->balanceFactor<<endl;
@@ -194,7 +205,8 @@ void AVLTree<T>::updateBalanceFactors()
       rotate_right(rcd,false);
       rotate_left(parent,false);
     }
-    updateBalanceFactors();
+setAllBalanceFactors();
+    //updateBalanceFactors();
   }
   if(parent->balanceFactor==2){
     cout<<"||"<<parent->balanceFactor<<endl;
@@ -205,11 +217,28 @@ void AVLTree<T>::updateBalanceFactors()
       rotate_left(lcd,false);
       rotate_right(parent,false);
     }
-    updateBalanceFactors();
+setAllBalanceFactors();
+  //  updateBalanceFactors();
   }
-  */
 }
-
+//template<typename T>
+//void AVLTree<T>::updateBalanceFactors()
+//{
+//  // NULL here means that key inserted was already in tree, so no need to rebalance
+//
+//  if (!node_just_inserted)
+//    return;
+//
+//  // (1) Update balance factors for insertion that just happened.   You should use the textbook pseudocode here
+//
+//  // (2) Rebalance via rotations
+//
+//  // (3) Update balance factors for rotation(s) that just happened
+//
+//  // This recomputes balance for every node of the tree
+//
+//  setAllBalanceFactors();
+//}
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -252,8 +281,12 @@ void AVLTree<T>::insertFileWords(char *filename)
 
 //----------------------------------------------------------------------------
 
+// UPDATED VERSION: CHANGED SINCE INITIAL ASSIGNMENT POSTING!
+
 // RIGHT tree rotation at node pointed to by t
 // reference to t because it is changed here -- it points to promoted node when we are done
+
+// need to update balance factors
 
 template<typename T>
 void AVLTree<T>::rotate_right(AVLNode<T> * & t, bool do_print)
@@ -284,6 +317,17 @@ void AVLTree<T>::rotate_right(AVLNode<T> * & t, bool do_print)
   t->setParent(left);
   left->setParent(parent);
 
+  // THIS WAS ADDED AFTER THE INITIAL ASSIGNMENT POSTING!
+
+  if (!parent)
+    root = left;
+  else {
+    if (t == parent->getRight())
+      parent->setRight(left);
+    else
+      parent->setLeft(left);
+  }
+
   // DEMOTION: t becomes the newly-promoted node's right child.  promoted node's existing right child, 
   // if any, becomes t's left child
 
@@ -298,8 +342,12 @@ void AVLTree<T>::rotate_right(AVLNode<T> * & t, bool do_print)
 
 //----------------------------------------------------------------------------
 
+// UPDATED VERSION: CHANGED SINCE INITIAL ASSIGNMENT POSTING!
+
 // LEFT tree rotation at node pointed to by t
 // reference to t because it is changed here -- it points to promoted node when we are done
+
+// need to update balance factors
 
 template<typename T>
 void AVLTree<T>::rotate_left(AVLNode<T> * & t, bool do_print)
@@ -330,6 +378,17 @@ void AVLTree<T>::rotate_left(AVLNode<T> * & t, bool do_print)
   t->setParent(right);
   right->setParent(parent);
 
+  // THIS WAS ADDED AFTER THE INITIAL ASSIGNMENT POSTING!
+
+  if (!parent)
+    root = right;
+  else {
+    if (t == parent->getLeft())
+      parent->setLeft(right);
+    else
+      parent->setRight(right);
+  }
+
   // DEMOTION: t becomes the newly-promoted node's left child.  promoted node's existing left child, 
   // if any, becomes t's right child
 
@@ -340,6 +399,73 @@ void AVLTree<T>::rotate_left(AVLNode<T> * & t, bool do_print)
     right_left->setParent(t);
 
   t = t->getParent();
+}
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+// computes and writes currentHeight in every node of the tree
+
+template<typename T>
+void AVLTree<T>::setAllCurrentHeights()
+{
+  setAllCurrentHeights(root);
+}
+
+//----------------------------------------------------------------------------
+
+template<typename T>
+int AVLTree<T>::setAllCurrentHeights(AVLNode<T> * t)
+{
+  if (!t)
+    return 0;
+  else {
+    t->currentHeight = 1 + max(setAllCurrentHeights(t->getLeft()), setAllCurrentHeights(t->getRight()));
+    return t->currentHeight;
+  }
+}
+
+//----------------------------------------------------------------------------
+
+// computes and writes balanceFactor in every node of the tree
+// also notes the worst one seen
+
+template<typename T>
+void AVLTree<T>::setAllBalanceFactors()
+{
+  setAllCurrentHeights();
+
+  worstBalanceFactor = 0;
+  setAllBalanceFactors(root);
+}
+
+//----------------------------------------------------------------------------
+
+// assuming that currentHeight is already written to every node
+
+template<typename T>
+void AVLTree<T>::setAllBalanceFactors(AVLNode<T> * t)
+{
+  if (!t)
+    return;
+  else {
+
+    int height_left = 0;
+    int height_right = 0;
+
+    if (t->getLeft() != NULL)
+      height_left = t->getLeft()->currentHeight;
+    if (t->getRight() != NULL)
+      height_right = t->getRight()->currentHeight;
+
+    t->balanceFactor = height_right - height_left;
+
+    if (abs(t->balanceFactor) > abs(worstBalanceFactor))
+      worstBalanceFactor = t->balanceFactor;
+
+    setAllBalanceFactors(t->getLeft());
+    setAllBalanceFactors(t->getRight());
+  }
 }
 
 //----------------------------------------------------------------------------
@@ -360,7 +486,7 @@ int AVLTree<T>::computeLevel(AVLNode<T> * t)
 
 //----------------------------------------------------------------------------
 
-// height of entire tree
+// computes height of entire tree.  does NOT write currentHeight 
 
 template<typename T>
 int AVLTree<T>::computeHeight()
@@ -369,6 +495,8 @@ int AVLTree<T>::computeHeight()
 }
 
 //----------------------------------------------------------------------------
+
+// computes height of subtree with t as its root.  does NOT write currentHeight 
 
 // empty tree has height 0
 // leaf node (no children) has height 1
@@ -389,7 +517,7 @@ int AVLTree<T>::computeHeight(AVLNode<T> * t)
 
 // height of right subtree - height of left
 
-// this is done "fresh" and not stored anywhere by default
+// this is done "fresh" and not written to balanceFactor
 
 template<typename T>
 int AVLTree<T>::computeBalance(AVLNode<T> * t)
@@ -400,6 +528,7 @@ int AVLTree<T>::computeBalance(AVLNode<T> * t)
     return computeHeight(t->getRight()) - computeHeight(t->getLeft());
 }
 
+//----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
 // first the root, then the root's children, then the root's grandchildren, and so on
@@ -428,7 +557,7 @@ void AVLTree<T>::print_levelorder()
 
     last_level = level;
 
-    cout << current->getKey() << " [" << computeBalance(current) << "][" << current->balanceFactor << "] ";
+    cout << current->getKey() << " [b1 " << computeBalance(current) << "][b2 " << current->balanceFactor << "][h " << current->currentHeight << "] ";
 
     AVLNode<T> *left, *right;
     left = current->getLeft();
@@ -464,12 +593,13 @@ void AVLTree<T>::print_pretty()
   int last_level, last_column; 
 
   int height = computeHeight();
-  int width = pow(2, height) - 1;
 
-  if (width > 160) {
+  if (height > 7) {
     cout << "tree height = " << height << " is too tall to print properly" << endl;
     return;
   }
+
+  int width = pow(2, height) - 1;
 
   // root column should be right in the middle of its width
 
@@ -560,11 +690,11 @@ void AVLTree<T>::insert(T & key)
   // normal BST insert
 
   root = insert(key, root, NULL);
-//  print_inorder();
+
   // this is where the AVL magic happens
 
-//  updateBalanceFactors();
-  //cout<<"end"<<endl;
+  print_inorder();
+  //updateBalanceFactors();
 }
 
 //----------------------------------------------------------------------------
@@ -585,9 +715,14 @@ AVLNode<T> *AVLTree<T>::insert(T & key, AVLNode<T> * t, AVLNode<T> * parent)
     t->setLeft(insert(key, t->getLeft(), t));
   else if (key > t->getKey())
     t->setRight(insert(key, t->getRight(), t));
+
+  // else we can infer that key == t->getKey()
+
   else {
     numKeys++;
     t->setNumber(t->getNumber() + 1);
+    node_just_inserted = NULL;
+    return t;
   }
   
 }

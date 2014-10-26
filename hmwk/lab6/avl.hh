@@ -139,37 +139,72 @@ private:
 template<typename T>
 void AVLTree<T>::updateBalanceFactors()
 {
+ // cout<<"BBBB"<<"\n";
   AVLNode<T> *new_node,*parent;
   new_node=node_just_inserted;
   parent=new_node->getParent();
-  if(parent->getLeft()==new_node){
+  //new_node->balanceFactor++;
+  //cout<<"begin "<<new_node->getKey()<<"||"<<endl;
+  if(!parent){
+    return;
+  }
+
+  //cout<<" |parent| "<<parent->getKey()<<parent->balanceFactor<<endl;
+  if((parent->getLeft())==new_node){
     parent->balanceFactor--;
   }else{
     parent->balanceFactor++;
   }
-  while(parent!=root && (parent->balanceFactor!=2||parent->balanceFactor!=-2) ){
-    AVLNode<T> *pp;
-    pp=parent;
+    cout<<"vvv  "<<parent<<"||"<<parent->getKey()<<endl;
+
+  AVLNode<T> *Q;
+  while(parent->getParent()!=NULL && (parent->balanceFactor!=2||parent->balanceFactor!=-2) ){
+    Q=parent;
+    cout<<"ppp"<<parent<<"||"<<parent->getKey()<<endl;
     parent=parent->getParent();
-    if(pp->balanceFactor==0){
+    cout<<"ssss"<<parent<<"||"<<parent->getKey()<<endl;
+   // if(parent==NULL){
+   //   return;
+   // }
+    if(Q->balanceFactor==0){
       return;
     } 
-    if(pp==parent->getLeft()){
+    if(Q==parent->getLeft()){
+      cout<<parent->getKey()<<"||"<<parent->balanceFactor<<endl;
+      cout<<Q->getKey()<<"||"<<Q->balanceFactor<<endl;
       parent->balanceFactor--;
     }else{
+      cout<<parent->getKey()<<endl;
+      cout<<Q->getKey()<<endl;
       parent->balanceFactor++;
     }
-    if(parent->balanceFactor==2 ){
-      rotate_left(parent,true); 
-    }
-    if(parent->balanceFactor==-2 ){
-      rotate_right(parent,true); 
-    }
   }
-
-  // (1) Update balance factors
-
-  // (2) Rebalance via rotations
+  cout<<"begi rebalance"<<endl;
+  if(parent->balanceFactor==-2 ){
+    cout<<"||"<<parent->getKey()<<"||"<<parent->balanceFactor<<endl;
+    AVLNode<T> *rcd=parent->getRight();
+    cout<<rcd<<endl;
+    if(rcd->balanceFactor==-1 ){
+      cout<<"1"<<endl;
+      rotate_left(parent,false); 
+    }else{
+      cout<<"3"<<endl;
+      rotate_right(rcd,false);
+      rotate_left(parent,false);
+    }
+    updateBalanceFactors();
+  }
+  if(parent->balanceFactor==2){
+    cout<<"||"<<parent->balanceFactor<<endl;
+    AVLNode<T> *lcd=parent->getLeft();
+    if(lcd->balanceFactor==-1 ){
+      rotate_right(parent,false); 
+    }else{
+      rotate_left(lcd,false);
+      rotate_right(parent,false);
+    }
+    updateBalanceFactors();
+  }
 }
 
 
@@ -526,6 +561,7 @@ void AVLTree<T>::insert(T & key)
   // this is where the AVL magic happens
 
   updateBalanceFactors();
+  //cout<<"end"<<endl;
 }
 
 //----------------------------------------------------------------------------
